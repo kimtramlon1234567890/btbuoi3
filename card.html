@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Card </title>
+        <style>
+        #cart {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .cart-item {
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .cart-item img {
+            width: 446px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        button {
+            display: block;
+            padding: 12px;
+            background-color: #0847c6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        </style>
+    </head>
+    <body>
+        <form name="frm">
+            <p>
+                <label>
+                    Product Name:
+                    <input type="text" name="ten"/>
+                </label>
+                <label>
+                    Product Picture:
+                    <input type="file" name="hin" id="hin" accept="image/*"/>
+
+                </label>
+                <label>
+                    Product price:
+                    <input type="number" name="pri" id="pri"/>
+                </label>
+            </p>
+        </form>
+        <button type="button" onclick="add()" > Add </button>
+        <div>
+            <h3> điện thoại nổi bật</h3>
+            <ul id="cart"></ul>
+        </div>
+        <script type="text/javascript">
+            function add(){
+                var hin = document.getElementById("hin").files[0];
+                var ten = document.getElementById("ten").value;
+                var pri = document.getElementById("pri").value;
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                var imgSrc = e.target.result;
+
+                var cartItem = document.createElement('li');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src='${imgSrc}' alt='Product Image' />
+                    <div>
+                        <p><strong>Product : ${ten}</strong></p>
+                        <p>Price: ${pri}</p>
+                    </div>
+                `;
+
+                document.getElementById("cart").appendChild(cartItem);
+                };
+                reader.readAsDataURL(hin);
+
+            }
+            function datmua() {
+            // Code xử lý đặt mua
+            }
+        </script>
+         <button type="button" onclick="datmua()">Đặt mua</button>
+    </body>
+</html>
